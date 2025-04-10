@@ -5,7 +5,7 @@ import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 
 # Load dataset
-df = pd.read_csv("ph_vehicle_dataset_strict_corrected.csv")
+df = pd.read_csv("ph_vehicle_dataset_final_cleaned.csv")
 
 # Define purpose mapping
 def map_purpose(product_type):
@@ -81,9 +81,9 @@ def get_recommendation(input_data, trained_data, encoder, product_column="Produc
 
 # Example usage, FARMER INPUTS HERE
 new_input = pd.DataFrame([{
-    "Product Type": "Ducks",
-    "Product Weight (kg)": 3000,
-    "Purpose": "livestock"
+    "Product Type": "Rice",
+    "Product Weight (kg)": 15000,
+    "Purpose": "Crops"
 }])
 
 # Get recommendation
