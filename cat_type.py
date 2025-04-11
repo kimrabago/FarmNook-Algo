@@ -5,7 +5,7 @@ import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 
 # Load dataset
-df = pd.read_csv("ph_vehicle_dataset_final_cleaned.csv")
+df = pd.read_csv("updated_dataset.csv")
 
 # Define purpose mapping
 def map_purpose(product_type):
@@ -13,7 +13,7 @@ def map_purpose(product_type):
     if product in ["pigs", "cows", "goats", "chickens"]:
         return "livestock"
     elif product in ["frozen fish", "meat", "milk", "fresh vegetables", "leafy greens", "eggs"]:
-        return "perishable crops"
+        return "goods"
     else:
         return "crops"
 
@@ -47,7 +47,7 @@ model_category = DecisionTreeClassifier()
 model_category.fit(X_final, df["Vehicle Category"])
 
 # Strict filtering enabled for all purpose types
-STRICT_PURPOSES = ["livestock", "perishable crops", "crops"]
+STRICT_PURPOSES = ["livestock", "goods", "crops"]
 
 # Get prediction and best vehicle type
 def get_recommendation(input_data, trained_data, encoder, product_column="Product Weight (kg)"):
@@ -81,9 +81,9 @@ def get_recommendation(input_data, trained_data, encoder, product_column="Produc
 
 # Example usage, FARMER INPUTS HERE
 new_input = pd.DataFrame([{
-    "Product Type": "Rice",
-    "Product Weight (kg)": 15000,
-    "Purpose": "Crops"
+    "Product Type": "fruits",
+    "Product Weight (kg)": 1000,
+    "Purpose":"crops"
 }])
 
 # Get recommendation
