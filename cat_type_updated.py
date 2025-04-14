@@ -4,7 +4,7 @@ from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
 
 # Load dataset
-df = pd.read_csv("farmnook_dataset.csv")
+df = pd.read_csv("farmnook_dataset_v2.csv")
 
 # Define purpose mapping
 def map_purpose(product_type):
@@ -24,19 +24,19 @@ if "Purpose" not in df.columns:
 vehicle_table = {
     "crops": [
         ("Motorcyle with Box", 1, 200),
-        ("Tricycle", 201, 500),
-        ("Small Multicab", 501, 1000),
-        ("Large Multicab", 1001, 1500),
-        ("Small Delivery Van", 600, 1200),
-        ("Large Delivery Van", 1201, 2000),
-        ("Elf Truck", 1501, 3500),
-        ("Small Pickup Truck", 801, 1200),
-        ("Medium Pickup Truck", 1201, 1500),
-        ("Large Pickup Truck", 2000, 3500),
-        ("Heavy Duty Pickup Truck",	3501, 4500),
-        ("Dropside Truck",	4501, 9000),
-        ("10 Wheeler Cargo Truck", 9001, 12000),
-        ("10 Wheeler Dump Truck", 12001, 15000),
+        ("Tricycle", 100, 500),
+        ("Small Multicab", 400, 1000),
+        ("Large Multicab", 900, 1500),
+        ("Small Delivery Van", 500, 1200),
+        ("Large Delivery Van", 1100, 2000),
+        ("Small Pickup Truck", 700, 1200),
+        ("Medium Pickup Truck", 1100, 1500),
+        ("Large Pickup Truck", 1900, 3500),
+        ("Heavy Duty Pickup Truck", 3400, 4500),
+        ("Dropside Truck", 4400, 9000),
+        ("Elf Truck", 1400, 3500),
+        ("10 Wheeler Cargo Truck", 8000, 12000),
+        ("10 Wheeler Dump Truck", 11000, 15000),
     ],
     "perishable goods": [  # Perishable goods
         ("Small Refrigerated Van", 1, 800),
@@ -106,7 +106,7 @@ def get_recommendation(input_data, encoder, product_column="Product Weight (kg)"
 # Example usage
 new_input = pd.DataFrame([{
     "Product Type": "fruit",
-    "Product Weight (kg)": 2000,
+    "Product Weight (kg)": 200,
     "Purpose": "crops"
 }])
 
