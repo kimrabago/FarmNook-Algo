@@ -65,8 +65,28 @@ pricing_rules = {
     "Large Multicab": {"base_fee": 200, "weight_fee": 1.5, "pickup_fee": 7.0, "delivery_fee": 14.0},
     "Small Delivery Van": {"base_fee": 250, "weight_fee": 1.7, "pickup_fee": 8.0, "delivery_fee": 16.0},
     "Large Delivery Van": {"base_fee": 300, "weight_fee": 2.0, "pickup_fee": 9.0, "delivery_fee": 18.0},
-    "Small Refrigerated Truck": {"base_fee": 350, "weight_fee": 2.5, "pickup_fee": 10.0, "delivery_fee": 20.0},
-    "10 wheeler Reefer Truck": {"base_fee": 500, "weight_fee": 3.0, "pickup_fee": 15.0, "delivery_fee": 25.0},
+
+    # 🚚 New entries
+    "Motorcyle with Box": {"base_fee": 80, "weight_fee": 0.5, "pickup_fee": 3.0, "delivery_fee": 5.0},
+    "Medium Pickup Truck": {"base_fee": 350, "weight_fee": 2.0, "pickup_fee": 10.0, "delivery_fee": 18.0},
+    "Large Pickup Truck": {"base_fee": 400, "weight_fee": 2.5, "pickup_fee": 11.0, "delivery_fee": 20.0},
+    "Heavy Duty Pickup Truck": {"base_fee": 500, "weight_fee": 3.0, "pickup_fee": 12.0, "delivery_fee": 22.0},
+    "Dropside Truck": {"base_fee": 600, "weight_fee": 3.2, "pickup_fee": 14.0, "delivery_fee": 24.0},
+    "Elf Truck": {"base_fee": 550, "weight_fee": 2.8, "pickup_fee": 13.0, "delivery_fee": 23.0},
+    "10 Wheeler Cargo Truck": {"base_fee": 900, "weight_fee": 4.0, "pickup_fee": 20.0, "delivery_fee": 30.0},
+    "10 Wheeler Dump Truck": {"base_fee": 950, "weight_fee": 4.2, "pickup_fee": 22.0, "delivery_fee": 32.0},
+
+    "Small Refrigerated Van": {"base_fee": 300, "weight_fee": 2.2, "pickup_fee": 9.0, "delivery_fee": 18.0},
+    "Medium Refrigerated Van": {"base_fee": 350, "weight_fee": 2.4, "pickup_fee": 10.0, "delivery_fee": 19.0},
+    "Large Refrigerated Van": {"base_fee": 400, "weight_fee": 2.6, "pickup_fee": 11.0, "delivery_fee": 20.0},
+    "Medium Refrigerated Truck": {"base_fee": 450, "weight_fee": 2.8, "pickup_fee": 12.0, "delivery_fee": 22.0},
+    "Large Refrigerated Truck": {"base_fee": 500, "weight_fee": 3.0, "pickup_fee": 13.0, "delivery_fee": 24.0},
+    "10 wheeler Reefer Truck": {"base_fee": 550, "weight_fee": 3.5, "pickup_fee": 15.0, "delivery_fee": 25.0},
+
+    "Small Livestock Truck": {"base_fee": 350, "weight_fee": 2.0, "pickup_fee": 10.0, "delivery_fee": 18.0},
+    "Medium Livestock Truck": {"base_fee": 450, "weight_fee": 2.5, "pickup_fee": 12.0, "delivery_fee": 22.0},
+    "Large Livestock Truck": {"base_fee": 550, "weight_fee": 3.0, "pickup_fee": 14.0, "delivery_fee": 26.0},
+    "10 wheeler Livestock Truck": {"base_fee": 700, "weight_fee": 3.5, "pickup_fee": 16.0, "delivery_fee": 28.0},
 }
 
 # Encode and prepare model data
@@ -143,6 +163,7 @@ def recommend():
 def estimate():
     try:
         data = request.json
+         print("🔍 Received estimate request:", data)  # Add this
         vehicle_type = data["vehicleType"]
         weight = float(data["weight"])
         pickup_distance = float(data["pickupDistance"])
@@ -158,6 +179,7 @@ def estimate():
         })
 
     except Exception as e:
+        print("🔥 Estimate Error:", str(e))
         return jsonify({"error": str(e)}), 400
         
 # === Run Flask App ===
