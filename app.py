@@ -58,6 +58,17 @@ vehicle_table = {
     ]
 }
 
+# Pricing rules per vehicle type
+pricing_rules = {
+    "Tricycle": {"base_fee": 100, "weight_fee": 1.0, "pickup_fee": 5.0, "delivery_fee": 10.0},
+    "Small Multicab": {"base_fee": 150, "weight_fee": 1.2, "pickup_fee": 6.0, "delivery_fee": 12.0},
+    "Large Multicab": {"base_fee": 200, "weight_fee": 1.5, "pickup_fee": 7.0, "delivery_fee": 14.0},
+    "Small Delivery Van": {"base_fee": 250, "weight_fee": 1.7, "pickup_fee": 8.0, "delivery_fee": 16.0},
+    "Large Delivery Van": {"base_fee": 300, "weight_fee": 2.0, "pickup_fee": 9.0, "delivery_fee": 18.0},
+    "Small Refrigerated Truck": {"base_fee": 350, "weight_fee": 2.5, "pickup_fee": 10.0, "delivery_fee": 20.0},
+    "10 wheeler Reefer Truck": {"base_fee": 500, "weight_fee": 3.0, "pickup_fee": 15.0, "delivery_fee": 25.0},
+}
+
 # Encode and prepare model data
 encoder = OneHotEncoder(sparse_output=False, handle_unknown="ignore")
 X_encoded = encoder.fit_transform(df[["Product Type", "Purpose"]])
@@ -103,6 +114,16 @@ def get_recommendation(input_data, encoder, product_column="Product Weight (kg)"
 
     return recommended_vehicles
 
+def estimate_delivery_cost(vehicle_type, weight, pickup_distance, delivery_distance):
+    rules = pricing_rules.get(vehicle_type)
+    if not rules:
+        return -1
+    base = rules["base_fee"]
+    weight_cost = rules["weight_fee"] * weight
+    pickup_cost = rules["pickup_fee"] * pickup_distance
+    delivery_cost = rules["delivery_fee"] * delivery_distance
+    return base + weight_cost + pickup_cost + delivery_cost
+
 # === API Endpoint ===
 @app.route("/recommend", methods=["POST"])
 def recommend():
@@ -118,6 +139,27 @@ def recommend():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
+@app.route("/estimate", methods=["POST"])
+def estimate():
+    try:
+        data = request.json
+        vehicle_type = data["vehicleType"]
+        weight = float(data["weight"])
+        pickup_distance = float(data["pickupDistance"])
+        delivery_distance = float(data["deliveryDistance"])
+
+        estimated_cost = estimate_delivery_cost(vehicle_type, weight, pickup_distance, delivery_distance)
+        if estimated_cost == -1:
+            return jsonify({"error": "Unsupported vehicle type"}), 400
+
+        return jsonify({
+            "vehicleType": vehicle_type,
+            "estimatedCost": round(estimated_cost, 2)
+        })
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+        
 # === Run Flask App ===
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
