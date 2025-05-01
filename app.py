@@ -163,7 +163,7 @@ def recommend():
 def estimate():
     try:
         data = request.json
-         print("🔍 Received estimate request:", data)  # Add this
+        print("🔍 Received estimate request:", data)  # Add this
         vehicle_type = data["vehicleType"]
         weight = float(data["weight"])
         pickup_distance = float(data["pickupDistance"])
