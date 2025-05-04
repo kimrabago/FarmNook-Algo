@@ -9,7 +9,7 @@ from sklearn.pipeline import Pipeline
 # --- Data Loading and Preprocessing ---
 
 # Load dataset
-df = pd.read_csv("farmnook_dataset_v2.csv")
+df = pd.read_csv("final_datasets.csv")
 
 # Define purpose mapping
 def map_purpose(product_type):
@@ -69,21 +69,11 @@ preprocessor = ColumnTransformer(
     remainder='drop' # Drop other columns if any
 )
 
-# Create the full pipeline with preprocessing and the Decision Tree model
-# We use DecisionTreeClassifier because Vehicle Type is a category.
-# Set max_depth to prevent potential overfitting on complex datasets. Tune as needed.
-# Set min_samples_leaf to ensure leaves aren't too specific. Tune as needed.
 model_pipeline = Pipeline(steps=[
     ('preprocessor', preprocessor),
     ('classifier', DecisionTreeClassifier(random_state=42, max_depth=10, min_samples_leaf=5))
 ])
 
-# Train the model
-# For simplicity here, we train on the whole dataset.
-# In practice, use train_test_split for evaluation.
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-# model_pipeline.fit(X_train, y_train)
-# print(f"Model Accuracy on Test Set: {model_pipeline.score(X_test, y_test):.4f}") # Example evaluation
 
 try:
     model_pipeline.fit(X, y)
@@ -144,14 +134,13 @@ def get_recommendation_dt(input_data, pipeline_model, top_n=5):
         # Check if the error is due to unseen features if handle_unknown wasn't 'ignore' or structure mismatch
         return ["Error occurred during recommendation"]
 
-
 # --- Example Usage ---
 
 # Ensure the input DataFrame has the same columns as used for training X
 # And apply the same preprocessing logic (like mapping purpose)
-new_product_type = "cow"
-new_weight = 600
-new_purpose = "livestock" # Derive purpose
+new_product_type = "rice"
+new_weight = 1150
+new_purpose = "crops" # Derive purpose
 
 new_input_df = pd.DataFrame([{
     "Product Type": new_product_type,
@@ -162,7 +151,7 @@ new_input_df = pd.DataFrame([{
 
 
 # Get recommendations using the Decision Tree model
-recommended_vehicle_types_dt = get_recommendation_dt(new_input_df, model_pipeline, top_n=3) # Get top 3
+recommended_vehicle_types_dt = get_recommendation_dt(new_input_df, model_pipeline, top_n=5) # Get top 3
 
 # Output
 print("\n--- Decision Tree Recommendation ---")

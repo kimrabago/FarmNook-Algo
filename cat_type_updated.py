@@ -105,8 +105,8 @@ def get_recommendation(input_data, encoder, product_column="Product Weight (kg)"
 
 # Example usage
 new_input = pd.DataFrame([{
-    "Product Type": "fruit",
-    "Product Weight (kg)": 200,
+    "Product Type": "rice",
+    "Product Weight (kg)": 10000,
     "Purpose": "crops"
 }])
 
