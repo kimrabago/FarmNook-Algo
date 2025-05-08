@@ -74,39 +74,51 @@ except ValueError as e:
 
 # Pricing rules per vehicle type
 pricing_rules = {
-    "Tricycle": {"base_fee": 100, "weight_fee": 1.0, "pickup_fee": 5.0, "delivery_fee": 10.0},
-    "Small Multicab": {"base_fee": 150, "weight_fee": 1.2, "pickup_fee": 6.0, "delivery_fee": 12.0},
-    "Large Multicab": {"base_fee": 200, "weight_fee": 1.5, "pickup_fee": 7.0, "delivery_fee": 14.0},
-    "Small Delivery Van": {"base_fee": 250, "weight_fee": 1.7, "pickup_fee": 8.0, "delivery_fee": 16.0},
-    "Large Delivery Van": {"base_fee": 300, "weight_fee": 2.0, "pickup_fee": 9.0, "delivery_fee": 18.0},
-    "Motorcyle with Box": {"base_fee": 80, "weight_fee": 0.5, "pickup_fee": 3.0, "delivery_fee": 5.0},
-    "Medium Pickup Truck": {"base_fee": 350, "weight_fee": 2.0, "pickup_fee": 10.0, "delivery_fee": 18.0},
-    "Large Pickup Truck": {"base_fee": 400, "weight_fee": 2.5, "pickup_fee": 11.0, "delivery_fee": 20.0},
-    "Heavy Duty Pickup Truck": {"base_fee": 500, "weight_fee": 3.0, "pickup_fee": 12.0, "delivery_fee": 22.0},
-    "Dropside Truck": {"base_fee": 600, "weight_fee": 3.2, "pickup_fee": 14.0, "delivery_fee": 24.0},
-    "Elf Truck": {"base_fee": 550, "weight_fee": 2.8, "pickup_fee": 13.0, "delivery_fee": 23.0},
-    "10 Wheeler Cargo Truck": {"base_fee": 900, "weight_fee": 4.0, "pickup_fee": 20.0, "delivery_fee": 30.0},
-    "10 Wheeler Dump Truck": {"base_fee": 950, "weight_fee": 4.2, "pickup_fee": 22.0, "delivery_fee": 32.0},
-    "Small Refrigerated Van": {"base_fee": 300, "weight_fee": 2.2, "pickup_fee": 9.0, "delivery_fee": 18.0},
-    "Medium Refrigerated Van": {"base_fee": 350, "weight_fee": 2.4, "pickup_fee": 10.0, "delivery_fee": 19.0},
-    "Large Refrigerated Van": {"base_fee": 400, "weight_fee": 2.6, "pickup_fee": 11.0, "delivery_fee": 20.0},
-    "Medium Refrigerated Truck": {"base_fee": 450, "weight_fee": 2.8, "pickup_fee": 12.0, "delivery_fee": 22.0},
-    "Large Refrigerated Truck": {"base_fee": 500, "weight_fee": 3.0, "pickup_fee": 13.0, "delivery_fee": 24.0},
-    "10 wheeler Reefer Truck": {"base_fee": 550, "weight_fee": 3.5, "pickup_fee": 15.0, "delivery_fee": 25.0},
-    "Small Livestock Truck": {"base_fee": 350, "weight_fee": 2.0, "pickup_fee": 10.0, "delivery_fee": 18.0},
-    "Medium Livestock Truck": {"base_fee": 450, "weight_fee": 2.5, "pickup_fee": 12.0, "delivery_fee": 22.0},
-    "Large Livestock Truck": {"base_fee": 550, "weight_fee": 3.0, "pickup_fee": 14.0, "delivery_fee": 26.0},
-    "10 wheeler Livestock Truck": {"base_fee": 700, "weight_fee": 3.5, "pickup_fee": 16.0, "delivery_fee": 28.0},
+  "Motorcycle with Box":         { "base_fee": 50,   "weight_fee": 0.5,  "pickup_fee": 5.0,   "delivery_fee": 6.0, "base_km": 2 }, #1, 100
+  "Tricycle":                    { "base_fee": 80,   "weight_fee": 0.8,  "pickup_fee": 6.0,   "delivery_fee": 9.0, "base_km": 2 },  #100-500
+  "Small Multicab":              { "base_fee": 100,  "weight_fee": 1.0,  "pickup_fee": 7.0,   "delivery_fee": 12.0, "base_km": 3 },  # 400-1000, close to sedan
+  "Large Multicab":              { "base_fee": 115,  "weight_fee": 0.9,  "pickup_fee": 8.0,   "delivery_fee": 14.0, "base_km": 3 },  # 900-1500, close to SUV
+  "Small Delivery Van":          { "base_fee": 200,  "weight_fee": 0.8,  "pickup_fee": 9.0,   "delivery_fee": 16.0, "base_km": 5 },  # 500-1200, 600kg MPV
+  "Large Delivery Van":          { "base_fee": 240,  "weight_fee": 0.7,  "pickup_fee": 10.0,  "delivery_fee": 18.0, "base_km": 5 }, # 1100-2000, 800kg pickup
+  "Small Pickup Truck":          { "base_fee": 280,  "weight_fee": 0.7,  "pickup_fee": 10.0,  "delivery_fee": 17.0, "base_km": 5 }, # 700-1200, 1000kg van
+  "Medium Pickup Truck":         { "base_fee": 940,  "weight_fee": 0.6,  "pickup_fee": 11.0,  "delivery_fee": 18.0, "base_km": 5 }, # 1100-1500,2000kg FB
+  "Large Pickup Truck":          { "base_fee": 1040, "weight_fee": 0.5,  "pickup_fee": 12.0,  "delivery_fee": 20.0, "base_km": 5 }, # 1900-3500, 2000kg aluminum
+  "Heavy Duty Pickup Truck":     { "base_fee": 1450, "weight_fee": 0.4,  "pickup_fee": 13.0,  "delivery_fee": 22.0, "base_km": 5 }, # 3400-4500
+  "Dropside Truck":              { "base_fee": 4420, "weight_fee": 0.3,  "pickup_fee": 14.0,  "delivery_fee": 23.0, "base_km": 5 }, # 4400-9000
+  "Elf Truck":                   { "base_fee": 1040, "weight_fee": 0.35, "pickup_fee": 13.0,  "delivery_fee": 22.0, "base_km": 5 }, # 1400-3500,close to 2000kg aluminum
+  "10 Wheeler Cargo Truck":      { "base_fee": 7200, "weight_fee": 0.2,  "pickup_fee": 30.0,  "delivery_fee": 45.0, "base_km": 5 }, # 8000-12000
+  "10 Wheeler Dump Truck":       { "base_fee": 7500, "weight_fee": 0.2,  "pickup_fee": 32.0,  "delivery_fee": 48.0, "base_km": 5 }, # 11000-15000
+
+  # PERISHABLE GOODS
+  "Small Refrigerated Van":      { "base_fee": 200,  "weight_fee": 0.8,  "pickup_fee": 9.0,   "delivery_fee": 18.0, "base_km": 5 }, # 1-800
+  "Medium Refrigerated Van":     { "base_fee": 240,  "weight_fee": 0.7,  "pickup_fee": 10.0,  "delivery_fee": 19.0, "base_km": 5 }, # 801-1200
+  "Large Refrigerated Van":      { "base_fee": 280,  "weight_fee": 0.6,  "pickup_fee": 11.0,  "delivery_fee": 20.0, "base_km": 5 }, # 1201-1500
+  "Small Refrigerated Truck":    { "base_fee": 940,  "weight_fee": 0.5,  "pickup_fee": 11.0,  "delivery_fee": 21.0, "base_km": 5 }, # 1501-3000
+  "Medium Refrigerated Truck":   { "base_fee": 1450, "weight_fee": 0.4,  "pickup_fee": 12.0,  "delivery_fee": 22.0, "base_km": 5 }, # 3001-5000
+  "Large Refrigerated Truck":    { "base_fee": 4420, "weight_fee": 0.3,  "pickup_fee": 13.0,  "delivery_fee": 24.0, "base_km": 5 }, # 5001-9000
+  "10 Wheeler Reefer Truck":     { "base_fee": 7200, "weight_fee": 0.2,  "pickup_fee": 35.0,  "delivery_fee": 50.0, "base_km": 5 }, # 9001-12000
+
+  # LIVESTOCK
+  "Small Livestock Truck":       { "base_fee": 240,  "weight_fee": 0.7,  "pickup_fee": 10.0,  "delivery_fee": 18.0, "base_km": 5 }, # 1-1500
+  "Medium Livestock Truck":      { "base_fee": 1040, "weight_fee": 0.5,  "pickup_fee": 11.0,  "delivery_fee": 21.0, "base_km": 5 }, # 1501-3000
+  "Large Livestock Truck":       { "base_fee": 1450, "weight_fee": 0.3,  "pickup_fee": 13.0,  "delivery_fee": 24.0, "base_km": 5 }, # 3001-7000
+  "10 Wheeler Livestock Truck":  { "base_fee": 7200, "weight_fee": 0.2,  "pickup_fee": 33.0,  "delivery_fee": 46.0, "base_km": 5 }  # 7001-12000
 }
 
 def estimate_delivery_cost(vehicle_type, weight, pickup_distance, delivery_distance):
     rules = pricing_rules.get(vehicle_type)
     if not rules:
         return -1
+
     base = rules["base_fee"]
     weight_cost = rules["weight_fee"] * weight
-    pickup_cost = rules["pickup_fee"] * pickup_distance
-    delivery_cost = rules["delivery_fee"] * delivery_distance
+
+    # Delivery (with cargo) is from pickup to drop-off
+    delivery_km_charged = max(delivery_distance - rules.get("base_km", 0), 0)
+
+    pickup_cost = rules["pickup_fee"] * pickup_distance     # empty run
+    delivery_cost = rules["delivery_fee"] * delivery_km_charged  # loaded run
+
     return base + weight_cost + pickup_cost + delivery_cost
 
 def get_recommendation_dt(input_data, pipeline_model, top_n=5):
@@ -147,10 +159,10 @@ def estimate():
         print("🔍 Received estimate request:", data)
         vehicle_type = data["vehicleType"]
         weight = float(data["weight"])
-        pickup_distance = float(data["pickupDistance"])
-        delivery_distance = float(data["deliveryDistance"])
+        business_to_pickup_km = float(data["pickupDistance"])
+        pickup_to_dropoff_km = float(data["deliveryDistance"])
 
-        estimated_cost = estimate_delivery_cost(vehicle_type, weight, pickup_distance, delivery_distance)
+        estimated_cost = estimate_delivery_cost(vehicle_type, weight, business_to_pickup_km, pickup_to_dropoff_km)
         if estimated_cost == -1:
             return jsonify({"error": "Unsupported vehicle type"}), 400
 

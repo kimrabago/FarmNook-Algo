@@ -564,7 +564,7 @@ Pigs,9371,livestock,10 wheeler Livestock Truck
 Rice,2140,crops,Elf Truck
 Cows,9021,livestock,10 wheeler Livestock Truck
 Cows,8301,livestock,10 wheeler Livestock Truck
-Corn,141,crops,Motorcycle with Box
+Corn,100,crops,Motorcycle with Box
 Rice,3510,crops,Heavy Duty Pickup Truck
 Corn,5260,crops,Dropside Truck
 Vegetables,8740,crops,10 Wheeler Cargo Truck
@@ -639,7 +639,7 @@ Rice,11560,crops,10 Wheeler Cargo Truck
 Fruits,8000,crops,10 Wheeler Cargo Truck
 Rice,14550,crops,10 Wheeler Dump Truck
 Chickens,4081,livestock,Large Livestock Truck
-Fruits,121,crops,Motorcycle with Box
+Fruits,82,crops,Motorcycle with Box
 Cows,321,livestock,Small Livestock Truck
 Pigs,1061,livestock,Small Livestock Truck
 Pigs,5721,livestock,Large Livestock Truck
@@ -829,7 +829,7 @@ Fruits,1410,crops,Large Delivery Van
 Meat,861,perishable goods,Medium Refrigerated Van
 Rice,8230,crops,10 Wheeler Cargo Truck
 Vegetables,4050,crops,Heavy Duty Pickup Truck
-Fruits,161,crops,Motorcycle with Box
+Fruits,98,crops,Motorcycle with Box
 Vegetables,920,crops,Large Multicab
 Rice,12010,crops,10 Wheeler Dump Truck
 Fresh Vegetables,11901,perishable goods,10 wheeler Reefer Truck
@@ -951,7 +951,7 @@ Frozen Fish,7621,perishable goods,Large Refrigerated Truck
 Corn,1160,crops,Small Pickup Truck
 Eggs,11361,perishable goods,10 wheeler Reefer Truck
 Vegetables,1140,crops,Medium Pickup Truck
-Vegetables,151,crops,Motorcycle with Box
+Vegetables,51,crops,Motorcycle with Box
 Fruits,3400,crops,Large Pickup Truck
 Milk,7121,perishable goods,Large Refrigerated Truck
 Rice,200,crops,Tricycle
@@ -963,7 +963,7 @@ Rice,8440,crops,10 Wheeler Cargo Truck
 Rice,920,crops,Small Delivery Van
 Pigs,6251,livestock,Large Livestock Truck
 Vegetables,14380,crops,10 Wheeler Dump Truck
-Rice,191,crops,Motorcycle with Box
+Rice,42,crops,Motorcycle with Box
 Pigs,501,livestock,Small Livestock Truck
 Milk,981,perishable goods,Medium Refrigerated Van
 Goats,6611,livestock,Large Livestock Truck
@@ -1615,7 +1615,7 @@ Rice,1020,crops,Large Multicab
 Fruits,8290,crops,Dropside Truck
 Goats,3371,livestock,Large Livestock Truck
 Cows,10471,livestock,10 wheeler Livestock Truck
-Vegetables,101,crops,Motorcycle with Box
+Vegetables,67,crops,Motorcycle with Box
 Corn,9470,crops,10 Wheeler Cargo Truck
 Chickens,10311,livestock,10 wheeler Livestock Truck
 Pigs,10511,livestock,10 wheeler Livestock Truck
@@ -3289,7 +3289,7 @@ Milk,6331,perishable goods,Large Refrigerated Truck
 Rice,7700,crops,Dropside Truck
 Pigs,661,livestock,Small Livestock Truck
 Fruits,12570,crops,10 Wheeler Dump Truck
-Rice,181,crops,Motorcycle with Box
+Rice,81,crops,Motorcycle with Box
 Meat,1911,perishable goods,Small Refrigerated Truck
 Chickens,6701,livestock,Large Livestock Truck
 Fresh Vegetables,5651,perishable goods,Large Refrigerated Truck
@@ -3422,7 +3422,7 @@ Fresh Vegetables,10441,perishable goods,10 wheeler Reefer Truck
 Vegetables,8020,crops,Dropside Truck
 Vegetables,11020,crops,10 Wheeler Cargo Truck
 Fruits,7200,crops,Dropside Truck
-Fruits,171,crops,Motorcycle with Box
+Fruits,28,crops,Motorcycle with Box
 Corn,10520,crops,10 Wheeler Cargo Truck
 Fruits,6370,crops,Dropside Truck
 Fruits,1030,crops,Small Pickup Truck
@@ -3978,7 +3978,7 @@ Corn,3150,crops,Large Pickup Truck
 Frozen Fish,10071,perishable goods,10 wheeler Reefer Truck
 Vegetables,5520,crops,Dropside Truck
 Corn,7140,crops,Dropside Truck
-Fruits,111,crops,Motorcycle with Box
+Fruits,56,crops,Motorcycle with Box
 Leafy Greens,1021,perishable goods,Medium Refrigerated Van
 Rice,5690,crops,Dropside Truck
 Fruits,1870,crops,Elf Truck
@@ -4343,7 +4343,7 @@ Cows,8581,livestock,10 wheeler Livestock Truck
 Corn,10680,crops,10 Wheeler Cargo Truck
 Cows,1671,livestock,Medium Livestock Truck
 Fruits,8340,crops,Dropside Truck
-Corn,131,crops,Motorcycle with Box
+Corn,35,crops,Motorcycle with Box
 Frozen Fish,11661,perishable goods,10 wheeler Reefer Truck
 Goats,4941,livestock,Large Livestock Truck
 Chickens,4161,livestock,Large Livestock Truck
