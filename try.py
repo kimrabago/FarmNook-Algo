@@ -9,7 +9,7 @@ from sklearn.pipeline import Pipeline
 # --- Data Loading and Preprocessing ---
 
 # Load dataset
-df = pd.read_csv("final_datasets.csv")
+df = pd.read_csv("adjusted_final_datasets.csv")
 
 # Define purpose mapping
 def map_purpose(product_type):
@@ -139,7 +139,7 @@ def get_recommendation_dt(input_data, pipeline_model, top_n=5):
 # Ensure the input DataFrame has the same columns as used for training X
 # And apply the same preprocessing logic (like mapping purpose)
 new_product_type = "rice"
-new_weight = 1150
+new_weight = 406
 new_purpose = "crops" # Derive purpose
 
 new_input_df = pd.DataFrame([{
