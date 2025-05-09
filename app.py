@@ -11,35 +11,17 @@ from sklearn.pipeline import Pipeline
 
 app = Flask(__name__)
 
-# Load dataset
-original_df = pd.read_csv("final_datasets.csv")
-
 # Load model training dataset
 df = pd.read_csv("final_datasets.csv")
 
-# Define purpose mapping
-def map_purpose(product_type):
-    product = str(product_type).lower()
-    if product in ["pigs", "cows", "goats", "chickens"]:
-        return "livestock"
-    elif product in ["frozen fish", "meat", "milk", "fresh vegetables", "leafy greens", "eggs"]:
-        return "perishable goods"
-    elif product in ["corn", "rice", "fruit", "wheat", "vegetables"]:
-        return "crops"
-    else:
-        return "crops"
-
-if "Purpose" not in df.columns:
-    if "Product Type" in df.columns:
-        df["Purpose"] = df["Product Type"].apply(map_purpose)
-    else:
-        raise ValueError("Dataset must contain a 'Product Type' column.")
-
+# Ensure dataset includes required columns
 required_cols = ["Product Type", "Purpose", "Product Weight (kg)", "Vehicle Type"]
 missing_cols = [col for col in required_cols if col not in df.columns]
+
 if missing_cols:
     raise ValueError(f"Dataset is missing required columns: {missing_cols}")
 
+#Data Cleaning
 df.dropna(subset=required_cols, inplace=True)
 df = df[df['Product Weight (kg)'] > 0]
 df = df[df['Vehicle Type'].notna() & (df['Vehicle Type'] != '')]
@@ -74,8 +56,8 @@ except ValueError as e:
 
 # Pricing rules per vehicle type
 pricing_rules = {
-  "Motorcycle with Box":         { "base_fee": 50,   "weight_fee": 0.5,  "pickup_fee": 5.0,   "delivery_fee": 6.0, "base_km": 2 }, #1, 100
-  "Tricycle":                    { "base_fee": 80,   "weight_fee": 0.8,  "pickup_fee": 6.0,   "delivery_fee": 9.0, "base_km": 2 },  #100-500
+  "Motorcycle with Box":         { "base_fee": 80,   "weight_fee": 1.0,  "pickup_fee": 6.0,   "delivery_fee": 7.0, "base_km": 2 }, #1, 75
+  "Tricycle":                    { "base_fee": 80,   "weight_fee": 0.8,  "pickup_fee": 6.0,   "delivery_fee": 9.0, "base_km": 2 },  #50-400
   "Small Multicab":              { "base_fee": 100,  "weight_fee": 1.0,  "pickup_fee": 7.0,   "delivery_fee": 12.0, "base_km": 3 },  # 400-1000, close to sedan
   "Large Multicab":              { "base_fee": 115,  "weight_fee": 0.9,  "pickup_fee": 8.0,   "delivery_fee": 14.0, "base_km": 3 },  # 900-1500, close to SUV
   "Small Delivery Van":          { "base_fee": 200,  "weight_fee": 0.8,  "pickup_fee": 9.0,   "delivery_fee": 16.0, "base_km": 5 },  # 500-1200, 600kg MPV
@@ -142,6 +124,13 @@ def get_recommendation_dt(input_data, pipeline_model, top_n=5):
 def recommend():
     try:
         data = request.json
+        allowed_purposes = ["crops", "livestock", "perishable goods"]
+        purpose = data["Purpose"].strip().lower()
+
+        # Validate purpose
+        if purpose not in allowed_purposes:
+            return jsonify({"error": f"Invalid purpose '{purpose}'. Must be one of: {', '.join(allowed_purposes)}"}), 400
+
         input_df = pd.DataFrame([{
             "Product Type": data["Product Type"],
             "Product Weight (kg)": float(data["Product Weight (kg)"]),
@@ -156,7 +145,6 @@ def recommend():
 def estimate():
     try:
         data = request.json
-        print("🔍 Received estimate request:", data)
         vehicle_type = data["vehicleType"]
         weight = float(data["weight"])
         business_to_pickup_km = float(data["pickupDistance"])
