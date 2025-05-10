@@ -1,10 +1,8 @@
 from flask import Flask, request, jsonify
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.metrics.pairwise import cosine_similarity
 import os
-from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
@@ -111,7 +109,7 @@ def get_recommendation_dt(input_data, pipeline_model, top_n=5):
         probabilities = pipeline_model.predict_proba(input_data)
         vehicle_classes = pipeline_model.named_steps['classifier'].classes_
         prob_list = list(zip(vehicle_classes, probabilities[0]))
-        prob_list.sort(key=lambda x: x[1], reverse=True)
+        prob_list.sort(key=lambda x: x[1])
         recommended_vehicles = [vehicle for vehicle, prob in prob_list if prob > 0][:top_n]
         if not recommended_vehicles:
             return ["No suitable vehicle found based on learned data"]
