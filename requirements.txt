@@ -1,5 +1,6 @@
 Flask
 pandas
-numpy
 scikit-learn
-gunicorn
+numpy
+requests
+python-dotenv
